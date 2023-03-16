@@ -1,22 +1,27 @@
+import java.io.IOException;
+import java.sql.SQLException;
 import service.DTO;
 import service.IService;
 import service.impl.ServiceFactory;
-import service.impl.ServiceMysqlImpl;
-import service.impl.ServiceSIImp;
+
 
 public class main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-          String env = "mysql";
-          
+		
+           String env = "mysql";
           // quiero obtener el DTO
-          
           IService service = ServiceFactory.getService(env);
           
-		      DTO dto = service.invoke();
+		      DTO dto = null;
+			   try {
+						dto = service.invoke();
+					} catch (ClassNotFoundException | IOException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 		      
-		      System.out.println(dto.toString());
+		  //    System.out.println(dto.toString());
 	}
 
 }
